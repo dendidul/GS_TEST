@@ -1,0 +1,15 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <OutputType>Library</OutputType>
+    <TargetFramework>net5.0</TargetFramework>
+    <ApplicationIcon />
+    <StartupObject />
+  </PropertyGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\GS_DevTest.General\GS_DevTest.General.csproj" />
+    <ProjectReference Include="..\GS_DevTest.Vilagers.Model\GS_DevTest.Vilagers.Model.csproj" />
+  </ItemGroup>
+
+</Project>

@@ -1,0 +1,68 @@
+﻿@model GS_DevTest.General.Model.ListVillageViewModel
+
+
+<h1>List Of Villager </h1>
+<br />
+<p>
+    @*<a asp-action="Create">Create New</a>*@
+    <a href="/Home/Create/" class="btn btn-primary">Create</a>
+</p>
+
+<p>
+    <h5>Average kills : @Model.average</h5>
+</p>
+<table class="table" id="datatable">
+    <thead>
+        <tr>
+
+            <th>
+                Villager Name
+            </th>
+            <th>
+               Age Of Death
+            </th>
+            <th>
+                Year Of Death
+            </th>
+            <th>
+                Count Of Death
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model.VillageList)
+        {
+            <tr>
+
+                <td>
+                    @Html.DisplayFor(modelItem => item.VilagerName)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.AgeOfDeath)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.YearOfDeath)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.CountOfDeath)
+                </td>
+                <td>
+                    @*@Html.ActionLink("Edit", "Edit", new { id = item.Id, Class = "btn btn-danger" }) |
+                        @Html.ActionLink("Delete", "Delete", new { id = item.Id })*@
+                    <a href="/Home/Edit/@item.Id" class="btn btn-warning btn-xs"><i class="fa fa-pencil"></i> Edit </a>
+                    @*<a href="/Produk/Details/@i.intProductId" class="btn btn-info btn-xs"><i class="fa fa-folder"></i>View Details </a>*@
+                    <a href="/Home/Delete/@item.Id" class="btn btn-danger btn-xs"><i class="fa fa-trash-o"></i> Delete </a>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
+
+@section scripts {
+    <script type="text/javascript">
+        $(document).ready(function () {
+            $('#datatable').dataTable();
+        });
+    </script>
+}

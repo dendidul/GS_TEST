@@ -1,0 +1,132 @@
+﻿@model GS_DevTest.General.Model.VillagerModel
+
+@{
+    ViewData["Title"] = "Edit";
+}
+
+<h1>Edit</h1>
+
+<h4>VillagerModel</h4>
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        <form asp-action="Edit">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <input asp-for="Id" class="form-control" type="hidden" />
+            @*<div class="form-group">
+            <label asp-for="Id" class="control-label"></label>
+
+            <span asp-validation-for="Id" class="text-danger"></span>
+        </div>*@
+            <div class="form-group">
+                <label asp-for="VilagerName" class="control-label"></label>
+                <input asp-for="VilagerName" class="form-control" />
+                <span asp-validation-for="VilagerName" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="AgeOfDeath" class="control-label"></label>
+                <input asp-for="AgeOfDeath" class="form-control" />
+                <span asp-validation-for="AgeOfDeath" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="YearOfDeath" class="control-label"></label>
+                <input asp-for="YearOfDeath" class="form-control" />
+                <span asp-validation-for="YearOfDeath" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="CountOfDeath" class="control-label"></label>
+                <input asp-for="CountOfDeath" class="form-control" readonly/>
+                <span asp-validation-for="CountOfDeath" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <input type="submit" value="Save" class="btn btn-primary" />
+            </div>
+        </form>
+    </div>
+</div>
+
+<div>
+    <a asp-action="Index">Back to List</a>
+</div>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+
+<script type="text/javascript">
+        $(document).ready(function () {
+            //$('#datatable').dataTable();
+            $("#AgeOfDeath").on("propertychange change keyup paste input", function (e) {
+                // do stuff;
+               // alert("yeah");
+                e.preventDefault();
+                var agedata = $("#AgeOfDeath").val();
+                var yeardata=  $("#YearOfDeath").val();
+
+                var url = "@Url.Action("GetCountOfDeath", "Home")";
+                $.ajax({
+                    url: url,
+                    //cache: false,
+                    //traditional: true,
+                    type: "POST",
+                    data: { age: agedata, year: yeardata},
+                    //contentType: "application/json; charset=utf-8",
+                    //async: false,
+
+                    success: function (result) {
+                        @*$.gritter.add({
+                            title: 'Success !',
+                            text: 'Updated Successfully'
+                        });
+                       // window.location.href = "@Model.Link";
+
+                        //setTimeout(location.reload(), 3000);
+                        location.reload();*@
+                        //alert(data);
+                        $("#CountOfDeath").val(result);
+                    },
+
+                    error: function (jqXHR, textStatus, errorMessage) {
+                        console.log(errorMessage);
+                    }
+                });
+            });
+
+            $("#YearOfDeath").on("propertychange change keyup paste input", function (e) {
+                // do stuff;
+               // alert("yeah");
+                e.preventDefault();
+                var agedata = $("#AgeOfDeath").val();
+                var yeardata=  $("#YearOfDeath").val();
+
+                var url = "@Url.Action("GetCountOfDeath", "Home")";
+                $.ajax({
+                    url: url,
+                    //cache: false,
+                    //traditional: true,
+                    type: "POST",
+                    data: { age: agedata, year: yeardata},
+                    //contentType: "application/json; charset=utf-8",
+                    //async: false,
+
+                    success: function (result) {
+                        @*$.gritter.add({
+                            title: 'Success !',
+                            text: 'Updated Successfully'
+                        });
+                       // window.location.href = "@Model.Link";
+
+                        //setTimeout(location.reload(), 3000);
+                        location.reload();*@
+                        //alert(data);
+                        $("#CountOfDeath").val(result);
+                    },
+
+                    error: function (jqXHR, textStatus, errorMessage) {
+                        console.log(errorMessage);
+                    }
+                });
+            });
+
+        });
+</script>
+}
